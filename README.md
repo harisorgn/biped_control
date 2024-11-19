@@ -1,14 +1,18 @@
 # Bipedal Walking Control
 
 ## Introduction
-This package includes the code that was developed to simulate the two
-successful leg placement strategies in a 3D spring-mass bipedal model.
-Each strategy is in a separate folder, ratio-beta and beta. 
+This project includes the code that was developed to simulate leg placement strategies in a 3D spring-mass bipedal model. These strategies rely on the body dynamics of the 3D bipedal model and do not contain any feedforward or feedback components. Thus, they are energetically efficient and easier to implement in a physical bipedal robot. Furthermore, they are inspired by how humans rely on the elasticity of their joints and tendons while walking, so that they do not have to adjust for any minor perturbation to their walking trajectory. 
+
+
+The package implements the bipedal model as a hybrid dynamical system that switches between a single-leg and a double-leg phase, a custom root-finding method to identify limit cycles of steady walking, utility functions to filter the found walking configurations given user's criteria, measurement functions that calculate the ground forces that apply on each leg and plotting functions to visualize different parts of the analysis.
+
+There are currently two successful strategies that have been identified, `ratio-beta` and `beta`. The analysis code for each one is in the respective folder.
+
 This work was a dissertation project for the MSc Robotics programme (2016-2017) at the University of Bristol and the report titled “Leg placement control based on passive dynamics of a 3D walking model” is included as well for a detailed description of the applied methods.
 
 
 ## How to use
-The functions in both folders (leg strategies) are identical for the most part, with some strategy-specific parts noted with comments. Different strategies can be applied to the model and their stability assessed by changing these blocks of code in biped3_step and biped3_TD functions, which include the step dynamics and the touch-down event respectively. Some additions may be necessary in the systems structure sys if novel control variables are introduced.
+The functions in both folders (leg strategies) are identical for the most part, with some strategy-specific parts noted with comments. Different strategies can be applied to the model and their stability assessed by changing these blocks of code in `biped3_step` and `biped3_TD` functions, which include the step dynamics and the touch-down event respectively. Some additions may be necessary in the systems structure sys if novel control variables are introduced.
 
 The sequence of the code is as follows :
 - First the `biped3_lc_search` function, which utilises a custom-built Newton-Raphson algorithm to find stable limit cycles of the system. 
